@@ -37,5 +37,5 @@ jobs:
     - name: build and push docker image
       run: |
         docker build -t practice/mine .
-        docker tag practice/mine:latest 891377378028.dkr.ecr.ap-south-1.amazonaws.com/practice/mine:latest
-        docker push 891377378028.dkr.ecr.ap-south-1.amazonaws.com/practice/mine:latest
+        docker tag practice/mine:latest public.ecr.aws/v3n4i0t2/practice/mine:latest
+        docker push public.ecr.aws/v3n4i0t2/practice/mine:latest
