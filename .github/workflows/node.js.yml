@@ -36,7 +36,7 @@ jobs:
 
   deploy:
     runs-on: ubuntu-latest
-    depends-on: build
+    need: build
     steps:
       - name : push docker image to ECR
         run : |
