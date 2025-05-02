@@ -16,9 +16,8 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [22.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
+        node-version: [22.x, 20.x, 18.x]
+        
     steps:
     - uses: actions/checkout@v4
     - name: Use Node.js ${{ matrix.node-version }}
@@ -36,7 +35,7 @@ jobs:
 
     - name : push docker image to ECR
       run : |
-          aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/v3n4i0t2
-          docker build -t practice/mine .
-          docker tag practice/mine:latest public.ecr.aws/v3n4i0t2/practice/mine:latest
-          docker push public.ecr.aws/v3n4i0t2/practice/mine:latest
+          aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin ${{ secrets.AWS_REGISTRY }}
+          docker build -t ${{ secrets.AWS_REPO }} .
+          docker tag ${{ secrets.AWS_REPO }}:${{ github.sha }} ${{ secrets.AWS_REGISTRY }}/${{ secrets.AWS_REPO }}:${{ github.sha }}
+          docker push ${{ secrets.AWS_REGISTRY }}/${{ secrets.AWS_REPO }}:${{ github.sha }}
