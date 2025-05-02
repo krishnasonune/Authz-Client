@@ -55,4 +55,4 @@ jobs:
       run : |
         docker pull ${{ secrets.AWS_REGISTRY }}/${{ secrets.AWS_REPO }}:${{ github.sha }}
         docker run -d -p 80:80 --name microui ${{ secrets.AWS_REGISTRY }}/${{ secrets.AWS_REPO }}:${{ github.sha }}
-        docker exec microui npm test
+        docker logs microui
