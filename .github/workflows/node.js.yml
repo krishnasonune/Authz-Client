@@ -35,8 +35,8 @@ jobs:
         aws-region: ap-south-1
 
   deploy:
-    depends-on: build
     runs-on: ubuntu-latest
+    depends-on: build
     steps:
       - name : push docker image to ECR
         run : |
